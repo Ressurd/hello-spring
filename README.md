@@ -11,7 +11,7 @@ hello-spring
 
 ## 단축키
 ##### ctrl + p -> 파라미터 보기
-
+##### alt + insert -> 제너레이트
 
 ## 소스코드
 
@@ -45,3 +45,37 @@ thymeleaf 문법중 하나, p 태그의 th:text 부분인데,
 ```
 해당하는 소스부분인데, 이중 model.addAttribute 부분.
 
+```java
+@GetMapping("hello-spring")
+    @ResponseBody
+    public String helloString(@RequestParam("name") String name){
+        return "hello " + name; // hello "name"
+    }
+```
+
+@ResponseBody -> return 내용 그대로 화면에 출력해주는 문법
+
+```java
+@GetMapping("hello-api")
+    @ResponseBody
+    public Hello helloApi(@RequestParam("name") String name){
+        Hello hello = new Hello();
+        hello.setName(name);
+        return hello;
+    }
+
+    static class Hello{
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+```
+
+getter and setter 방법 및 json 방식으로 웹페이지 부르기
+기본적인 세팅으로는 @ResponseBody 는 json 방식으로 반환함
